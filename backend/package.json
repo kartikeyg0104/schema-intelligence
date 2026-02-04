@@ -1,0 +1,22 @@
+{
+  "name": "graphql-schema-intelligence-backend",
+  "version": "1.0.0",
+  "description": "Backend for GraphQL Schema Intelligence & Query Performance Studio",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:analysis": "node analysisServer.js",
+    "start:all": "node server.js & node analysisServer.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.10.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

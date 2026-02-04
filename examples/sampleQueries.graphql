@@ -1,0 +1,287 @@
+# Sample GraphQL Queries
+# Use these to test the Query Analyzer
+
+# ============================================
+# Simple Query (Low Complexity)
+# Expected: Low cost, depth 2
+# ============================================
+
+query SimpleUsers {
+  users {
+    id
+    name
+    email
+  }
+}
+
+# ============================================
+# Moderate Query (Medium Complexity)
+# Expected: Medium cost, depth 3
+# ============================================
+
+query PublicationsWithAuthors {
+  publications {
+    id
+    title
+    abstract
+    publishedDate
+    authors {
+      id
+      name
+      affiliation
+    }
+    tags {
+      name
+    }
+  }
+}
+
+# ============================================
+# Complex Query (High Complexity)
+# Expected: High cost, depth 5, nested lists warning
+# ============================================
+
+query DeepPublication {
+  publications {
+    title
+    authors {
+      name
+      institution {
+        name
+        authors {
+          name
+          publications {
+            title
+          }
+        }
+      }
+    }
+    citations {
+      title
+      citations {
+        title
+      }
+    }
+  }
+}
+
+# ============================================
+# Expensive Query (Critical Complexity)
+# Expected: Critical cost, multiple warnings
+# ============================================
+
+query ExpensiveQuery {
+  publications {
+    title
+    abstract
+    content
+    authors {
+      name
+      email
+      institution {
+        name
+        country
+        authors {
+          name
+          publications {
+            title
+            citations {
+              title
+              authors {
+                name
+              }
+            }
+          }
+        }
+        departments {
+          name
+          authors {
+            name
+          }
+        }
+      }
+      coAuthors {
+        name
+        publications {
+          title
+        }
+      }
+    }
+    citations {
+      title
+      citations {
+        title
+        citedBy {
+          title
+        }
+      }
+    }
+    comments {
+      content
+      author {
+        name
+        comments {
+          content
+        }
+      }
+      replies {
+        content
+        author {
+          name
+        }
+      }
+    }
+    relatedPublications {
+      title
+      authors {
+        name
+      }
+    }
+  }
+}
+
+# ============================================
+# Query with Comments
+# Expected: Medium cost, shows comment threading
+# ============================================
+
+query PublicationComments {
+  publications {
+    title
+    comments {
+      id
+      content
+      author {
+        name
+      }
+      replies {
+        content
+        author {
+          name
+        }
+      }
+      createdAt
+      likes
+    }
+  }
+}
+
+# ============================================
+# Institution Focus
+# Expected: Medium cost, shows institution relationships
+# ============================================
+
+query InstitutionDetails {
+  institutions {
+    name
+    country
+    type
+    ranking
+    departments {
+      name
+      headOfDepartment {
+        name
+      }
+    }
+    authors {
+      name
+      hIndex
+      totalCitations
+    }
+    publications {
+      title
+      publishedDate
+    }
+  }
+}
+
+# ============================================
+# User Activity
+# Expected: Medium-High cost
+# ============================================
+
+query UserActivity {
+  users {
+    name
+    bio
+    publications {
+      title
+      authors {
+        name
+      }
+    }
+    comments {
+      content
+      publication {
+        title
+      }
+    }
+    followedAuthors {
+      name
+      institution {
+        name
+      }
+    }
+    savedPublications {
+      title
+    }
+  }
+}
+
+# ============================================
+# Search Query
+# Expected: Low-Medium cost
+# ============================================
+
+query SearchPublications {
+  searchPublications(query: "machine learning") {
+    id
+    title
+    abstract
+    publishedDate
+    authors {
+      name
+    }
+    tags {
+      name
+    }
+    viewCount
+    downloadCount
+  }
+}
+
+# ============================================
+# Single Entity Query
+# Expected: Very low cost
+# ============================================
+
+query SinglePublication {
+  publication(id: "1") {
+    id
+    title
+    abstract
+    publishedDate
+  }
+}
+
+# ============================================
+# Tags and Related Tags
+# Expected: Low-Medium cost, shows tag relationships
+# ============================================
+
+query TagExploration {
+  tags {
+    id
+    name
+    description
+    publications {
+      title
+    }
+    relatedTags {
+      name
+      publications {
+        title
+      }
+    }
+  }
+}

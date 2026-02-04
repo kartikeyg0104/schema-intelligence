@@ -1,0 +1,100 @@
+# GraphQL Schema for Research Publication Platform
+# This schema is intentionally complex to demonstrate analysis capabilities
+
+type Query {
+  users: [User!]!
+  user(id: ID!): User
+  publications: [Publication!]!
+  publication(id: ID!): Publication
+  authors: [Author!]!
+  author(id: ID!): Author
+  institutions: [Institution!]!
+  institution(id: ID!): Institution
+  tags: [Tag!]!
+  searchPublications(query: String!): [Publication!]!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String
+  bio: String
+  publications: [Publication!]!
+  comments: [Comment!]!
+  followedAuthors: [Author!]!
+  savedPublications: [Publication!]!
+  createdAt: String!
+}
+
+type Publication {
+  id: ID!
+  title: String!
+  abstract: String
+  content: String
+  publishedDate: String!
+  authors: [Author!]!
+  citations: [Publication!]!
+  citedBy: [Publication!]!
+  tags: [Tag!]!
+  comments: [Comment!]!
+  relatedPublications: [Publication!]!
+  viewCount: Int!
+  downloadCount: Int!
+}
+
+type Author {
+  id: ID!
+  name: String!
+  email: String
+  affiliation: String
+  institution: Institution
+  publications: [Publication!]!
+  coAuthors: [Author!]!
+  hIndex: Int
+  totalCitations: Int
+}
+
+type Institution {
+  id: ID!
+  name: String!
+  country: String!
+  type: InstitutionType!
+  authors: [Author!]!
+  departments: [Department!]!
+  publications: [Publication!]!
+  ranking: Int
+}
+
+type Department {
+  id: ID!
+  name: String!
+  institution: Institution!
+  authors: [Author!]!
+  headOfDepartment: Author
+}
+
+type Comment {
+  id: ID!
+  content: String!
+  author: User!
+  publication: Publication!
+  replies: [Comment!]!
+  parentComment: Comment
+  createdAt: String!
+  likes: Int!
+}
+
+type Tag {
+  id: ID!
+  name: String!
+  description: String
+  publications: [Publication!]!
+  relatedTags: [Tag!]!
+}
+
+enum InstitutionType {
+  UNIVERSITY
+  RESEARCH_INSTITUTE
+  COMPANY
+  GOVERNMENT
+}
