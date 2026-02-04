@@ -1,0 +1,22 @@
+{
+  "name": "graphql-schema-intelligence",
+  "version": "1.0.0",
+  "description": "GraphQL Schema Intelligence & Query Performance Studio",
+  "scripts": {
+    "build": "cd backend && npm install && npm run build",
+    "start": "cd backend && npm start",
+    "install:all": "cd backend && npm install && cd ../frontend && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kartikeyg0104/schema-intelligence"
+  },
+  "keywords": [
+    "graphql",
+    "schema",
+    "query-analyzer",
+    "performance"
+  ],
+  "author": "",
+  "license": "ISC"
+}

@@ -10,6 +10,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const PORT = process.env.PORT || process.env.ANALYSIS_PORT || 4001;
+
 const schemaPath = path.join(__dirname, 'schema.graphql');
 
 // Initialize analysis engines
@@ -193,8 +195,6 @@ app.get('/health', (req, res) => {
     uptime: process.uptime(),
   });
 });
-
-const PORT = process.env.ANALYSIS_PORT || 4001;
 
 app.listen(PORT, () => {
   console.log(`📊 Analysis Server ready at http://localhost:${PORT}`);

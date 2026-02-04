@@ -24,7 +24,7 @@ async function startServer() {
   app.use(express.json());
   app.use('/graphql', expressMiddleware(server));
 
-  const PORT = process.env.GRAPHQL_PORT || 4000;
+  const PORT = process.env.PORT || process.env.GRAPHQL_PORT || 4000;
   
   app.listen(PORT, () => {
     console.log(`🚀 GraphQL Server ready at http://localhost:${PORT}/graphql`);
