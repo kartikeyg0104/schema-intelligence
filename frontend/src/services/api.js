@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ANALYSIS_API_URL = process.env.REACT_APP_ANALYSIS_API_URL || 'http://localhost:4001';
+const ANALYSIS_API_URL = process.env.REACT_APP_API_URL || 'http://localhost:4001';
 
 const api = axios.create({
   baseURL: ANALYSIS_API_URL,
