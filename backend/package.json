@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "build": "npm install",
-    "start": "node server.js",
-    "start:analysis": "node analysisServer.js",
+    "start": "node analysisServer.js",
+    "start:graphql": "node server.js",
     "start:all": "node server.js & node analysisServer.js",
     "dev": "nodemon server.js"
   },
