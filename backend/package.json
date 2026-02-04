@@ -4,7 +4,7 @@
   "description": "Backend for GraphQL Schema Intelligence & Query Performance Studio",
   "main": "server.js",
   "scripts": {
-    "build": "echo 'No build step required for Node.js backend'",
+    "build": "npm install",
     "start": "node server.js",
     "start:analysis": "node analysisServer.js",
     "start:all": "node server.js & node analysisServer.js",
