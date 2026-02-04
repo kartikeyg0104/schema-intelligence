@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { analyzeQuery } from '../services/api';
 
 const QueryHistory = () => {
   const [history, setHistory] = useState([]);
@@ -13,18 +12,6 @@ const QueryHistory = () => {
       setHistory(JSON.parse(saved));
     }
   }, []);
-
-  const saveToHistory = (query, result) => {
-    const newEntry = {
-      id: Date.now(),
-      query,
-      result,
-      timestamp: new Date().toISOString(),
-    };
-    const updated = [newEntry, ...history].slice(0, 20); // Keep last 20
-    setHistory(updated);
-    localStorage.setItem('queryHistory', JSON.stringify(updated));
-  };
 
   const deleteEntry = (id) => {
     const updated = history.filter(h => h.id !== id);
