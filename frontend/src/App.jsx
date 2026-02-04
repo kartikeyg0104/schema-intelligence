@@ -25,7 +25,8 @@ function App() {
     // Check server status
     const checkServer = async () => {
       try {
-        const response = await fetch('http://localhost:4001/health');
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4001';
+        const response = await fetch(`${apiUrl}/health`);
         if (response.ok) {
           setServerStatus('online');
         } else {
