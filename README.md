@@ -2,6 +2,8 @@
 
 A full-stack developer tool that analyzes GraphQL schema structure and query complexity to help teams design maintainable schemas and prevent expensive queries.
 
+**🤖 NEW: Machine Learning Integration** - Predict query complexity, performance, and detect anomalies using neural networks!
+
 ## Problem This Project Solves
 
 As GraphQL APIs grow, schemas become increasingly complex. Developers face challenges such as:
@@ -9,8 +11,10 @@ As GraphQL APIs grow, schemas become increasingly complex. Developers face chall
 - Certain types becoming unintentional "hotspots"
 - Queries becoming slow due to excessive depth or list expansions
 - Lack of tooling to explain *why* a query is expensive
+- **NEW**: Predicting query performance before execution
+- **NEW**: Detecting unusual query patterns that may indicate issues
 
-This project fills that gap by combining **schema introspection**, **complexity analysis**, **query AST parsing**, and **interactive visualization**.
+This project fills that gap by combining **schema introspection**, **complexity analysis**, **query AST parsing**, **interactive visualization**, and **machine learning predictions**.
 
 ## System Architecture
 
@@ -24,12 +28,16 @@ Analysis Backend
   ├─ Schema Graph Builder
   ├─ Complexity Metrics Engine
   ├─ Query AST Analyzer
+  ├─ 🤖 ML Trainer (Neural Networks)
+  ├─ 🤖 ML Predictor (Real-time Predictions)
         ↓
 Frontend Dashboard
 (React + JSX + D3.js)
   ├─ Schema Graph Visualization
   ├─ Metrics & Insights Panel
   ├─ Query Analyzer Interface
+  ├─ 🤖 ML Training Interface
+  ├─ 🤖 ML Predictions Display
 ```
 
 ## Technology Stack
@@ -39,12 +47,30 @@ Frontend Dashboard
 - Apollo Server
 - graphql (graphql-js)
 - Express
+- **🤖 brain.js** (Neural Networks)
 
 ### Frontend
 - JavaScript
 - React (JSX)
 - D3.js
 - Axios
+
+## 🤖 Machine Learning Features
+
+### Three ML Models:
+1. **Complexity Prediction** - Predicts query complexity score (0-1) with confidence levels
+2. **Performance Prediction** - Estimates execution time in milliseconds
+3. **Anomaly Detection** - Identifies unusual query patterns
+
+### ML Capabilities:
+- Neural network training with synthetic data
+- Real-time predictions on new queries
+- Confidence scoring for predictions
+- Training data collection from real queries
+- Model persistence and reloading
+- Comprehensive training statistics
+
+📖 **[Read Full ML Documentation](ML_README.md)**
 
 ## Getting Started
 

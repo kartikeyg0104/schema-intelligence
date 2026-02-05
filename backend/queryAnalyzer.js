@@ -1,14 +1,16 @@
 const { parse, visit, TypeInfo, visitWithTypeInfo, buildSchema } = require('graphql');
 const fs = require('fs');
 const path = require('path');
+const MLPredictor = require('./mlPredictor');
 
 /**
  * Query Cost & Complexity Analyzer
  * Parses GraphQL queries and estimates their cost
+ * Enhanced with Machine Learning predictions
  */
 
 class QueryAnalyzer {
-  constructor(schemaPath) {
+  constructor(schemaPath, enableML = true) {
     const schemaString = fs.readFileSync(schemaPath, 'utf-8');
     this.schema = buildSchema(schemaString);
     this.typeInfo = new TypeInfo(this.schema);
@@ -21,6 +23,19 @@ class QueryAnalyzer {
       maxRecommendedDepth: 5,
       maxRecommendedCost: 100,
     };
+
+    // Initialize ML predictor
+    this.enableML = enableML;
+    this.mlPredictor = null;
+    if (enableML) {
+      try {
+        this.mlPredictor = new MLPredictor();
+        this.mlPredictor.loadModels();
+      } catch (error) {
+        console.warn('ML predictor initialization failed:', error.message);
+        this.enableML = false;
+      }
+    }
   }
 
   /**
@@ -30,7 +45,36 @@ class QueryAnalyzer {
     try {
       const ast = parse(queryString);
       const analysis = this.traverseAST(ast);
-      return this.buildReport(analysis);
+      const report = this.buildReport(analysis);
+      
+      // Add ML predictions if enabled
+      if (this.enableML && this.mlPredictor) {
+        try {
+          const mlPredictions = this.mlPredictor.analyzeQuery({
+            maxDepth: analysis.maxDepth,
+            fieldCount: analysis.fieldCount,
+            listFields: analysis.listFields,
+            nestedLists: analysis.nestedLists,
+            estimatedCost: this.calculateCost(analysis),
+            hasArguments: false, // Can be enhanced
+            hasFragments: false, // Can be enhanced
+          });
+          
+          report.mlPredictions = mlPredictions;
+          
+          // Merge ML recommendations with existing ones
+          if (mlPredictions.recommendations) {
+            report.recommendations = [
+              ...report.recommendations,
+              ...mlPredictions.recommendations,
+            ];
+          }
+        } catch (mlError) {
+          console.warn('ML prediction failed:', mlError.message);
+        }
+      }
+      
+      return report;
     } catch (error) {
       return {
         success: false,

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { analyzeQuery } from '../services/api';
+import MLPredictions from './MLPredictions';
 
 const QueryAnalyzer = () => {
   const [query, setQuery] = useState('');
@@ -247,6 +248,9 @@ const QueryAnalyzer = () => {
               </div>
             </div>
           )}
+
+          {/* ML Predictions */}
+          {result.mlPredictions && <MLPredictions predictions={result.mlPredictions} />}
         </div>
       )}
     </div>

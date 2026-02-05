@@ -5,6 +5,7 @@ import QueryAnalyzer from './components/QueryAnalyzer';
 import SchemaHealth from './components/SchemaHealth';
 import TypeExplorer from './components/TypeExplorer';
 import QueryHistory from './components/QueryHistory';
+import MLTrainer from './components/MLTrainer';
 import './App.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
     { id: 'metrics', label: 'Metrics', icon: '📊' },
     { id: 'analyzer', label: 'Query Analyzer', icon: '⚡' },
     { id: 'history', label: 'History', icon: '📜' },
+    { id: 'ml-trainer', label: 'ML Trainer', icon: '🤖' },
   ];
 
   useEffect(() => {
@@ -92,6 +94,7 @@ function App() {
         {activeTab === 'metrics' && <MetricsPanel />}
         {activeTab === 'analyzer' && <QueryAnalyzer />}
         {activeTab === 'history' && <QueryHistory />}
+        {activeTab === 'ml-trainer' && <MLTrainer />}
       </main>
 
       <footer className="app-footer">

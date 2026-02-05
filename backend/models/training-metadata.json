@@ -1,0 +1,31 @@
+{
+  "trainedAt": "2026-02-05T04:06:42.568Z",
+  "results": {
+    "complexity": {
+      "success": true,
+      "error": 0.02479104588981439,
+      "iterations": 2000,
+      "samples": 50,
+      "modelPath": "/Users/kartikey0104/Desktop/GsocProjects/Project1/graphql-schema-intelligence/backend/models/complexity-model.json"
+    },
+    "performance": {
+      "success": true,
+      "error": 0.0030819271300526817,
+      "iterations": 3,
+      "samples": 50,
+      "modelPath": "/Users/kartikey0104/Desktop/GsocProjects/Project1/graphql-schema-intelligence/backend/models/performance-model.json"
+    },
+    "anomaly": {
+      "success": true,
+      "error": 0,
+      "iterations": 1,
+      "samples": 50,
+      "modelPath": "/Users/kartikey0104/Desktop/GsocProjects/Project1/graphql-schema-intelligence/backend/models/anomaly-model.json"
+    }
+  },
+  "totalSamples": {
+    "complexity": 50,
+    "performance": 50,
+    "anomalies": 50
+  }
+}

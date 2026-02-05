@@ -100,5 +100,116 @@ export const checkHealth = async () => {
   }
 };
 
-export default api;
+/**
+ * ML API Functions
+ */
 
+/**
+ * Train all ML models
+ */
+export const trainAllModels = async (options = {}) => {
+  try {
+    const response = await api.post('/ml/train/all', options);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to train models:', error);
+    throw error;
+  }
+};
+
+/**
+ * Train complexity model
+ */
+export const trainComplexityModel = async (options = {}) => {
+  try {
+    const response = await api.post('/ml/train/complexity', options);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to train complexity model:', error);
+    throw error;
+  }
+};
+
+/**
+ * Train performance model
+ */
+export const trainPerformanceModel = async (options = {}) => {
+  try {
+    const response = await api.post('/ml/train/performance', options);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to train performance model:', error);
+    throw error;
+  }
+};
+
+/**
+ * Train anomaly detection model
+ */
+export const trainAnomalyModel = async (options = {}) => {
+  try {
+    const response = await api.post('/ml/train/anomaly', options);
+    return response.data;
+  } catch (error) {
+    console.error('Failed to train anomaly model:', error);
+    throw error;
+  }
+};
+
+/**
+ * Get ML predictions for a query
+ */
+export const getMLPredictions = async (query) => {
+  try {
+    const response = await api.post('/ml/predict', { query });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to get ML predictions:', error);
+    throw error;
+  }
+};
+
+/**
+ * Add training data
+ */
+export const addTrainingData = async (type, queryAnalysis, actualValue) => {
+  try {
+    const response = await api.post('/ml/training-data/add', {
+      type,
+      queryAnalysis,
+      actualValue,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Failed to add training data:', error);
+    throw error;
+  }
+};
+
+/**
+ * Get ML training statistics
+ */
+export const getMLStats = async () => {
+  try {
+    const response = await api.get('/ml/stats');
+    return response.data;
+  } catch (error) {
+    console.error('Failed to get ML stats:', error);
+    throw error;
+  }
+};
+
+/**
+ * Get ML model information
+ */
+export const getMLModelInfo = async () => {
+  try {
+    const response = await api.get('/ml/models/info');
+    return response.data;
+  } catch (error) {
+    console.error('Failed to get ML model info:', error);
+    throw error;
+  }
+};
+
+export default api;
